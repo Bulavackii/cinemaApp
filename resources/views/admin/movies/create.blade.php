@@ -72,7 +72,7 @@
 
                         <div class="text-center mt-4">
                             <a href="{{ route('admin.movies.index') }}" class="btn btn-secondary me-3">Отмена</a>
-                            <button type="submit" class="btn btn-primary">Добавить фильм</button>
+                            <button type="submit" class="btn btn-primary">Добавить</button>
                         </div>
                     </form>
                 </div>

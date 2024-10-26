@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <a href="{{ route('admin.seances.create') }}" class="btn btn-primary mb-4">Создать Новый Сеанс</a>
+    <a href="{{ route('admin.seances.create') }}" class="btn btn-primary mb-4">Создать</a>
 
     @if($seances->count() > 0)
         <div class="table-responsive">

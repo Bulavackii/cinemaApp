@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="actions mb-3 d-flex justify-content-between">
-                    <a href="{{ route('admin.halls.create') }}" class="btn btn-success">Добавить новый зал</a>
+                    <a href="{{ route('admin.halls.create') }}" class="btn btn-success">Добавить</a>
                 </div>
 
                 <table class="table table-striped table-bordered table-hover">

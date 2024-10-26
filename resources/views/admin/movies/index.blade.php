@@ -69,7 +69,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-warning btn-sm">Изменить</a>
+                                            <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-warning btn-sm">Правка</a>
 
                                             <!-- Форма для удаления фильма -->
                                             <form action="{{ route('admin.movies.destroy', $movie->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Вы уверены, что хотите удалить этот фильм?');">
