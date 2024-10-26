@@ -1,0 +1,193 @@
+/* Основные стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%; /* Базовый размер шрифта 10px = 62.5% */
+}
+
+body {
+  background-image: url("../i/background.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: right;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header {
+  padding: 2rem;
+  text-align: center;
+}
+
+.page-header__title {
+  margin: 0;
+  font-weight: 900;
+  font-size: 2.6rem; /* Для мобильных устройств */
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.page-header__title span {
+  font-weight: 100;
+}
+
+/* Главное меню */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  color: #ffffff;
+}
+
+.page-nav .page-nav__day {
+  flex-basis: 48%;
+  font-size: 1.6rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.page-nav .page-nav__day_chosen {
+  font-weight: 700;
+  border: 2px solid #ff0000;
+  background-color: #ffe5e5;
+}
+
+.page-nav .page-nav__day_weekend {
+  color: #DE2121;
+}
+
+/* Стили для фильмов */
+.movie {
+  display: flex;
+  flex-direction: row; /* Располагаем элементы в строку */
+  align-items: flex-start;
+  background: rgba(241, 235, 230, 0.95);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.movie__poster {
+  flex-shrink: 0; /* Фиксируем размер постера */
+  margin-right: 1.5rem;
+  max-width: 200px;
+  border-radius: 8px;
+}
+
+.movie__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.movie__synopsis {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.movie__data {
+  font-size: 1.4rem;
+  color: #555;
+}
+
+/* Кнопка "Забронировать" */
+.acceptin-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 4rem;
+  background-color: #16A6AF;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.acceptin-button:hover {
+  background-color: #137A7E;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media screen and (max-width: 768px) {
+  .movie {
+    flex-direction: column; /* Возвращаемся к колонке на маленьких экранах */
+    align-items: center;
+  }
+
+  .movie__poster {
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+
+  .movie__info {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* Дополнительные стили для планшетов и десктопов */
+@media screen and (min-width: 768px) {
+  .page-header__title {
+    font-size: 3.2rem;
+  }
+
+  .movie {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .movie .movie__poster {
+    margin-right: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .movie .movie__info {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    background-position: center;
+  }
+
+  .page-header__title {
+    font-size: 4rem;
+  }
+
+  .movie {
+    padding: 2rem;
+    margin: 3rem 0;
+  }
+
+  .acceptin-button {
+    padding: 1.5rem 6rem;
+    font-size: 1.8rem;
+  }
+}

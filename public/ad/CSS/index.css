@@ -1,0 +1,316 @@
+/* Общие стили */
+body {
+    background-image: url('../i/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+main {
+    flex-grow: 1;
+    padding: 15px;
+}
+
+/* Основные стили для контейнера */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #333;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+/* Центрирование и исправление смещения вправо на маленьких экранах */
+@media (max-width: 575.98px) {
+    .container {
+        padding: 10px;
+        margin: 0 auto;
+    }
+}
+
+/* Стили для таблиц */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    background-color: #fff;
+    border-collapse:separate
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    border-bottom: 1px solid #343a40;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+thead {
+    background-color: #343a40;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+/* Адаптивное отображение таблиц в мобильных режимах */
+@media (max-width: 575.98px), (max-width: 767.98px) {
+    th, td {
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+}
+
+/* Исправление для кнопок "Редактировать" и "Удалить" на главной странице сеансов */
+.btn-sm {
+    width: 100px;
+    margin: 0 5px;
+}
+
+/* Выровненные кнопки "Сохранить" и "Отменить" на странице редактирования сеанса */
+.text-center button {
+    margin: 0 5px;
+    width: 150px;
+}
+
+/* Управление пользователями: исправление переноса кнопок */
+@media (max-width: 767.98px) {
+    .user-card-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 10px;
+    }
+
+    .user-card-actions button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Исправление отображения кнопок под блоками */
+.users-card .btn {
+    margin-top: 15px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стили для карточек */
+.admin-card {
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+/* Медиа-запрос для режима от 768 пикселей — перенос карточек по вертикали */
+@media (max-width: 992px) {
+    .card-deck {
+        display: block;
+    }
+
+    .admin-card {
+        margin-bottom: 15px;
+    }
+}
+
+/* Стили кнопок */
+.btn {
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+@media (max-width: 575.98px) {
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-light {
+    background-color: #f8f9fa;
+    border: none;
+}
+
+.btn-light:hover {
+    background-color: #e0e0e0;
+}
+
+.btn-outline-warning {
+    color: #000;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background-color: #f78504;
+    color: #000;
+}
+
+/* Исправление для мобильных устройств */
+@media (max-width: 575.98px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 10px 15px;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 14px;
+        padding-left: 5px;
+    }
+
+    .card-header {
+        font-size: 1.2rem;
+    }
+
+    .admin-card .card-header {
+        font-size: 1rem;
+    }
+
+    .card .card-body {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .movie-poster {
+        width: 80px;
+    }
+
+    .movie-poster-thumb {
+        width: 60px;
+    }
+
+    .pagination .page-item .page-link {
+        padding: 5px 8px;
+    }
+}
+
+/* Медиа-запросы для планшетов */
+@media (max-width: 767.98px) {
+    body {
+        font-size: 15px;
+    }
+
+    .container {
+        padding: 15px 20px;
+    }
+
+    .navbar-brand img {
+        height: 45px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 15px;
+        padding-left: 8px;
+    }
+
+    .card-header {
+        font-size: 1.3rem;
+    }
+
+    .admin-card .card-header {
+        font-size: 1.1rem;
+    }
+
+    .card .card-body {
+        padding: 15px;
+    }
+
+    .btn {
+        padding: 9px 15px;
+        font-size: 15px;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .movie-poster {
+        width: 100px;
+    }
+
+    .movie-poster-thumb {
+        width: 80px;
+    }
+
+    .pagination .page-item .page-link {
+        padding: 6px 10px;
+    }
+}

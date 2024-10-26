@@ -1,0 +1,587 @@
+/* Общие стили */
+body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+    background-image: url('../i/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Навигация */
+.navbar {
+    padding: 1rem 1.5rem;
+    background-color: #e9ecef;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #ff9800;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    font-size: 1.1rem;
+    color: #007bff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ecb418;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ecb418;
+}
+
+.navbar-nav .nav-link i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover i {
+    transform: scale(1.2);
+}
+
+/* Анимация карточек */
+.movie-card {
+    border: none;
+    border-radius: 15px;
+    max-width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 15px auto;
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Уменьшаем расстояние между карточками в адаптивных режимах */
+@media (max-width: 768px) {
+    .movie-card {
+        margin: 10px 5px;
+    }
+}
+
+.movie-poster {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Текст и стили внутри карточки */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+    margin: 10px 20px;
+}
+
+/* Кнопка бронирования */
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    margin: 15px auto;
+    display: block;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Заголовки разделов */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Футер */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    z-index: 10;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Футер всегда внизу */
+.page-footer {
+    margin-bottom: 100px;
+}
+
+/* Исправление отступа для футера */
+.movie-detail-page,
+.profile-page {
+    margin-bottom: 80px;
+}
+
+.footer-social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.footer-social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.footer-social-icons img:hover {
+    transform: scale(1.2);
+}
+
+/* Блок с расписанием фильмов */
+.list-group-item {
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.list-group-item .movie-poster {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.list-group-item h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.list-group-item p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.list-group-item .btn {
+    margin-top: 10px;
+}
+
+/* Стили для страницы деталей фильма */
+.movie__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.movie__synopsis {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.movie__data {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.acceptin-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.acceptin-button:hover {
+    background-color: #0056b3;
+}
+
+.movie__poster {
+    object-fit: cover;
+    max-height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Карточка фильма на странице деталей */
+.movie.card {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Центрирование карточек на странице */
+.row.justify-content-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col-sm-6.col-md-4,
+.col-md-6 {
+    display: flex;
+    justify-content: center;
+}
+
+.d-flex.align-items-stretch {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Формы и кнопки */
+.btn-primary {
+    background-color: #007bff;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Форма оплаты */
+.card {
+    border-radius: 10px;
+}
+
+header,
+footer {
+    text-align: center;
+}
+
+/* Секция бронирования мест */
+.hall-layout {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.seating-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.seat-row-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.row-label {
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.seats-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.seat {
+    position: relative;
+    margin: 2px;
+}
+
+.seat input[type="checkbox"] {
+    display: none;
+}
+
+.seat-number {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стиль для VIP и обычных мест */
+.seat-number.available,
+.seat-number.vip {
+    border-radius: 10px;
+    background-color: #4caf50;
+    border: 2px solid #388e3c;
+}
+
+.seat-number.available:hover,
+.seat-number.vip:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* Выбранные места */
+.seat input[type="checkbox"]:checked + .seat-number {
+    background-color: #ff9800;
+    transform: scale(1.1);
+}
+
+/* Забронированные места */
+.seat-number.booked {
+    background-color: #f44336;
+    border: 2px solid #d32f2f;
+    cursor: not-allowed;
+}
+
+/* Экран кинотеатра */
+.screen-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.screen {
+    width: 80%;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* Карточки билетов */
+.ticket-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Белый фон для контраста */
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Тень для выделения */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.ticket-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Усиленный эффект при наведении */
+}
+
+.ticket-left {
+    flex-grow: 1;
+    padding-right: 20px;
+}
+
+.ticket-left h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.ticket-left p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.ticket-right {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-code {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 10px;
+}
+
+.btn-download {
+    background-color: #ff9800;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-download:hover {
+    background-color: #e68900;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 767px) {
+    .movie-card {
+        max-width: 300px;
+    }
+
+    .movie-poster {
+        height: 300px;
+    }
+
+    .seat-number {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
+
+    .row-label {
+        width: 60px;
+        font-size: 12px;
+    }
+
+    .btn-warning {
+        padding: 8px 20px;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .list-group-item .movie-poster {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .section-title {
+        width: 80%;
+        font-size: 2rem;
+        padding: 10px 20px;
+    }
+
+    /* Адаптивность для раздела "Мои билеты" */
+    .ticket-card {
+        flex-direction: column;
+    }
+
+    .ticket-left,
+    .ticket-right {
+        width: 100%;
+    }
+
+    .qr-code {
+        width: 100px;
+        height: 100px;
+    }
+
+    .movie-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-download {
+        padding: 10px 20px;
+    }
+}
+
+/* Стили для блока с текстом соглашения */
+.policy-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Оформление ссылок внутри соглашения */
+.policy-content a {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.policy-content a:hover {
+    color: #ff9800;
+}
+
+/* Оформление заголовков */
+.policy-content h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+/* Стили для страницы авторизации и регистрации */
+.auth-page {
+    margin-bottom: 100px; /* Увеличенный отступ для футера */
+}
+
