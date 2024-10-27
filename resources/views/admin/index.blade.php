@@ -2,11 +2,13 @@
 
 @section('content')
     <div class="container mt-5">
+        <!-- Карточка с заголовком "Административная панель" -->
         <div class="card shadow-lg">
             <div class="card-header bg-dark text-white text-center">
                 <h2 class="mb-0">Административная панель</h2>
             </div>
             <div class="card-body">
+                <!-- Вывод уведомления об успешном выполнении действия -->
                 @if (session('status'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('status') }}
@@ -16,6 +18,7 @@
                     </div>
                 @endif
 
+                <!-- Вывод ошибок валидации данных -->
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <ul class="mb-0">
@@ -29,8 +32,9 @@
                     </div>
                 @endif
 
+                <!-- Карточки с управлением основными объектами системы -->
                 <div class="row mt-4 justify-content-center">
-                    <!-- Карточка Пользователи -->
+                    <!-- Карточка "Пользователи" -->
                     <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                         <div class="card admin-card text-white bg-info mb-4 shadow-sm w-100">
                             <div class="card-header text-center">
@@ -47,7 +51,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Карточка Управление Залами -->
+
+                    <!-- Карточка "Управление Залами" -->
                     <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                         <div class="card admin-card text-white bg-primary mb-4 shadow-sm w-100">
                             <div class="card-header text-center">
@@ -61,7 +66,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Карточка Управление Сеансами -->
+
+                    <!-- Карточка "Управление Сеансами" -->
                     <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                         <div class="card admin-card text-white bg-success mb-4 shadow-sm w-100">
                             <div class="card-header text-center">
@@ -75,7 +81,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Карточка Управление Фильмами -->
+
+                    <!-- Карточка "Управление Фильмами" -->
                     <div class="col-md-3 col-sm-6 d-flex align-items-stretch">
                         <div class="card admin-card text-white bg-warning mb-4 shadow-sm w-100">
                             <div class="card-header text-center">

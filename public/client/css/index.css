@@ -163,12 +163,10 @@ footer p {
     margin: 0;
 }
 
-/* Футер всегда внизу */
 .page-footer {
     margin-bottom: 100px;
 }
 
-/* Исправление отступа для футера */
 .movie-detail-page,
 .profile-page {
     margin-bottom: 80px;
@@ -582,6 +580,6 @@ footer {
 }
 /* Стили для страницы авторизации и регистрации */
 .auth-page {
-    margin-bottom: 100px; /* Увеличенный отступ для футера */
+    margin-bottom: 100px; 
 }
 

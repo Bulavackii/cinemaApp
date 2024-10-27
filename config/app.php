@@ -4,101 +4,99 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
+    | Название приложения
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application, which will be used when the
-    | framework needs to place the application's name in a notification or
-    | other UI elements where an application name needs to be displayed.
+    | Значение, которое определяет название приложения. Оно будет использоваться
+    | в различных уведомлениях или других элементах интерфейса, где нужно
+    | отобразить название приложения.
     |
     */
-
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | Окружение приложения
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | Это значение определяет текущее "окружение", в котором работает приложение.
+    | Оно может использоваться для настройки различных сервисов, в зависимости от
+    | того, работает ли приложение в режиме разработки, тестирования или производства.
+    | Это значение можно настроить в файле ".env".
     |
     */
-
     'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Debug Mode
+    | Режим отладки приложения
     |--------------------------------------------------------------------------
     |
-    | When your application is in debug mode, detailed error messages with
-    | stack traces will be shown on every error that occurs within your
-    | application. If disabled, a simple generic error page is shown.
+    | Когда приложение находится в режиме отладки, будут отображаться подробные
+    | сообщения об ошибках с трассировкой стека. Если отладка отключена, будет
+    | отображаться простая страница с сообщением об ошибке.
     |
     */
-
     'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
-    | Application URL
+    | URL приложения
     |--------------------------------------------------------------------------
     |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | the application so that it's available within Artisan commands.
+    | Этот URL используется консолью для правильного формирования URL-адресов при
+    | использовании команд Artisan. Убедитесь, что он установлен на корневой URL
+    | вашего приложения, чтобы он был доступен для команд Artisan.
     |
     */
-
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Часовой пояс приложения
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. The timezone
-    | is set to "UTC" by default as it is suitable for most use cases.
+    | Здесь вы можете указать часовой пояс по умолчанию для вашего приложения, который
+    | будет использоваться функциями работы с датами и временем в PHP. По умолчанию
+    | используется UTC, что подходит для большинства случаев.
     |
     */
-
     'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Locale Configuration
+    | Локализация приложения
     |--------------------------------------------------------------------------
     |
-    | The application locale determines the default locale that will be used
-    | by Laravel's translation / localization methods. This option can be
-    | set to any locale for which you plan to have translation strings.
+    | Локализация определяет язык по умолчанию, который будет использоваться методами
+    | перевода в Laravel. Это значение можно установить на любую локаль, для которой
+    | у вас есть файлы перевода.
     |
     */
-
     'locale' => env('APP_LOCALE', 'en'),
 
+    // Резервная локализация, которая будет использоваться, если основная локализация недоступна
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    // Локализация, используемая Faker для генерации тестовых данных
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Key
+    | Ключ шифрования
     |--------------------------------------------------------------------------
     |
-    | This key is utilized by Laravel's encryption services and should be set
-    | to a random, 32 character string to ensure that all encrypted values
-    | are secure. You should do this prior to deploying the application.
+    | Этот ключ используется сервисами шифрования Laravel и должен быть случайной
+    | строкой длиной 32 символа, чтобы все зашифрованные данные были безопасны.
+    | Необходимо установить этот ключ перед развертыванием приложения.
     |
     */
-
     'cipher' => 'AES-256-CBC',
 
+    // Ключ шифрования приложения
     'key' => env('APP_KEY'),
 
+    // Предыдущие ключи шифрования (если использовались)
     'previous_keys' => [
         ...array_filter(
             explode(',', env('APP_PREVIOUS_KEYS', ''))
@@ -107,20 +105,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Maintenance Mode Driver
+    | Драйвер режима обслуживания
     |--------------------------------------------------------------------------
     |
-    | These configuration options determine the driver used to determine and
-    | manage Laravel's "maintenance mode" status. The "cache" driver will
-    | allow maintenance mode to be controlled across multiple machines.
+    | Эти параметры конфигурации определяют драйвер, используемый для управления
+    | "режимом обслуживания" Laravel. Драйвер "cache" позволяет контролировать режим
+    | обслуживания на нескольких машинах одновременно.
     |
-    | Supported drivers: "file", "cache"
+    | Поддерживаемые драйверы: "file", "cache"
     |
     */
-
     'maintenance' => [
-        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'), // Драйвер для режима обслуживания
+        'store' => env('APP_MAINTENANCE_STORE', 'database'), // Хранилище для статуса режима обслуживания
     ],
 
 ];

@@ -9,32 +9,35 @@ class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
+    | Контроллер входа
     |--------------------------------------------------------------------------
     |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
+    | Этот контроллер обрабатывает аутентификацию пользователей для приложения
+    | и перенаправляет их на главную страницу после успешного входа. Контроллер
+    | использует трейт для удобного предоставления своей функциональности.
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers; // Трейт для предоставления функциональности аутентификации
 
     /**
-     * Where to redirect users after login.
+     * Куда перенаправлять пользователей после успешного входа.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Перенаправление на домашнюю страницу после входа
 
     /**
-     * Create a new controller instance.
+     * Создание нового экземпляра контроллера.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // Middleware "guest" разрешает доступ только для неавторизованных пользователей, за исключением выхода
+        $this->middleware('guest')->except('logout'); 
+        
+        // Middleware "auth" разрешает доступ к методу 'logout' только авторизованным пользователям
         $this->middleware('auth')->only('logout');
     }
 }

@@ -3,18 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Засевает базу данных приложения.
      */
     public function run(): void
     {
+        // Этот код создает 10 случайных пользователей с помощью фабрики 
         // User::factory(10)->create();
 
+        // Создание конкретного пользователя с определенными данными
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

@@ -17,7 +17,7 @@
                 </form>
 
                 <div class="row mt-4">
-                    <!-- Администраторы -->
+                    <!-- Секция Администраторов -->
                     <div class="col-md-6">
                         <div class="card bg-primary text-white shadow-sm mb-4">
                             <div class="card-header text-center">
@@ -32,6 +32,7 @@
                                                 <br>
                                                 <small class="text-muted">Добавлен: {{ $admin->created_at->format('d.m.Y H:i') }}</small>
                                             </div>
+                                            <!-- Форма для изменения роли пользователя на Гостя -->
                                             <form action="{{ route('admin.users.toggleRole', $admin->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
@@ -48,7 +49,7 @@
                         </div>
                     </div>
 
-                    <!-- Гости -->
+                    <!-- Секция Гостей -->
                     <div class="col-md-6">
                         <div class="card bg-success text-white shadow-sm mb-4">
                             <div class="card-header text-center">
@@ -63,6 +64,7 @@
                                                 <br>
                                                 <small class="text-muted">Добавлен: {{ $guest->created_at->format('d.m.Y H:i') }}</small>
                                             </div>
+                                            <!-- Форма для изменения роли пользователя на Админа -->
                                             <form action="{{ route('admin.users.toggleRole', $guest->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
@@ -80,7 +82,7 @@
                     </div>
                 </div>
 
-                <!-- Пагинация -->
+                <!-- Пагинация для списков администраторов и гостей -->
                 <div class="d-flex justify-content-center">
                     {{ $admins->links() }}
                     {{ $guests->links() }}
@@ -89,7 +91,7 @@
         </div>
     </div>
 
-    {{-- Подключение FontAwesome --}}
+    {{-- Подключение FontAwesome для иконок --}}
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     {{-- Подключение стилей --}}

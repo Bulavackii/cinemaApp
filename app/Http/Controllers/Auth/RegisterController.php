@@ -12,61 +12,64 @@ class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Register Controller
+    | Контроллер регистрации
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
+    | Этот контроллер обрабатывает регистрацию новых пользователей, а также их
+    | валидацию и создание. По умолчанию контроллер использует трейт для
+    | предоставления этой функциональности без необходимости дополнительного кода.
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers; // Трейт для обработки регистрации и входа новых пользователей
 
     /**
-     * Where to redirect users after registration.
+     * Куда перенаправлять пользователей после успешной регистрации.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Перенаправление на главную страницу после регистрации
 
     /**
-     * Create a new controller instance.
+     * Создание нового экземпляра контроллера.
      *
      * @return void
      */
     public function __construct()
     {
+        // Middleware "guest" разрешает доступ только для гостей, неавторизованных пользователей
         $this->middleware('guest');
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Получить валидатор для входящего запроса на регистрацию.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
+        // Валидация данных регистрации: имя, email и пароль
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'], // Имя пользователя обязательно и не длиннее 255 символов
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], // Email обязательно должен быть уникальным
+            'password' => ['required', 'string', 'min:3', 'confirmed'], // Пароль обязательно минимум 3 символа и должен быть подтвержден
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Создать нового пользователя после успешной валидации.
      *
      * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
+        // Создание нового пользователя с захешированным паролем
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $data['name'], // Имя пользователя
+            'email' => $data['email'], // Email пользователя
+            'password' => Hash::make($data['password']), // Хеширование пароля перед сохранением
         ]);
     }
 }

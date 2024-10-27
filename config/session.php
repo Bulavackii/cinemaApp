@@ -6,212 +6,185 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Session Driver
+    | Драйвер сессий по умолчанию
     |--------------------------------------------------------------------------
     |
-    | This option determines the default session driver that is utilized for
-    | incoming requests. Laravel supports a variety of storage options to
-    | persist session data. Database storage is a great default choice.
+    | Этот параметр определяет драйвер сессий, который используется по умолчанию
+    | для входящих запросов. Laravel поддерживает различные хранилища для
+    | сохранения данных сессий. База данных является хорошим выбором по умолчанию.
     |
-    | Supported: "file", "cookie", "database", "apc",
-    |            "memcached", "redis", "dynamodb", "array"
+    | Поддерживаемые драйверы: "file", "cookie", "database", "apc",
+    |                          "memcached", "redis", "dynamodb", "array"
     |
     */
-
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => env('SESSION_DRIVER', 'file'), // Драйвер сессий по умолчанию (используется 'file')
 
     /*
     |--------------------------------------------------------------------------
-    | Session Lifetime
+    | Время жизни сессии
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the number of minutes that you wish the session
-    | to be allowed to remain idle before it expires. If you want them
-    | to expire immediately when the browser is closed then you may
-    | indicate that via the expire_on_close configuration option.
+    | Здесь вы можете указать количество минут, в течение которых сессия будет
+    | активной до её истечения. Если вы хотите, чтобы сессия завершалась при
+    | закрытии браузера, укажите это через параметр 'expire_on_close'.
     |
     */
-
-    'lifetime' => env('SESSION_LIFETIME', 120),
-
-    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    'lifetime' => env('SESSION_LIFETIME', 120), // Время жизни сессии в минутах
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false), // Закрывать сессию при закрытии браузера
 
     /*
     |--------------------------------------------------------------------------
-    | Session Encryption
+    | Шифрование сессий
     |--------------------------------------------------------------------------
     |
-    | This option allows you to easily specify that all of your session data
-    | should be encrypted before it's stored. All encryption is performed
-    | automatically by Laravel and you may use the session like normal.
+    | Эта опция позволяет включить шифрование данных сессии перед их сохранением.
+    | Laravel автоматически зашифрует и расшифрует данные сессии, если эта
+    | опция включена.
     |
     */
-
-    'encrypt' => env('SESSION_ENCRYPT', false),
+    'encrypt' => env('SESSION_ENCRYPT', false), // Включить шифрование сессий (по умолчанию отключено)
 
     /*
     |--------------------------------------------------------------------------
-    | Session File Location
+    | Путь для хранения файлов сессий
     |--------------------------------------------------------------------------
     |
-    | When utilizing the "file" session driver, the session files are placed
-    | on disk. The default storage location is defined here; however, you
-    | are free to provide another location where they should be stored.
+    | При использовании драйвера "file" для сессий файлы сессий будут сохраняться
+    | на диске. Здесь можно указать путь для хранения этих файлов.
     |
     */
-
-    'files' => storage_path('framework/sessions'),
+    'files' => storage_path('framework/sessions'), // Путь для файлов сессий
 
     /*
     |--------------------------------------------------------------------------
-    | Session Database Connection
+    | Подключение к базе данных для сессий
     |--------------------------------------------------------------------------
     |
-    | When using the "database" or "redis" session drivers, you may specify a
-    | connection that should be used to manage these sessions. This should
-    | correspond to a connection in your database configuration options.
+    | При использовании драйверов "database" или "redis" для сессий, можно указать
+    | подключение к базе данных, которое будет использоваться для управления сессиями.
     |
     */
-
-    'connection' => env('SESSION_CONNECTION'),
+    'connection' => env('SESSION_CONNECTION'), // Подключение к базе данных для сессий
 
     /*
     |--------------------------------------------------------------------------
-    | Session Database Table
+    | Таблица для сессий в базе данных
     |--------------------------------------------------------------------------
     |
-    | When using the "database" session driver, you may specify the table to
-    | be used to store sessions. Of course, a sensible default is defined
-    | for you; however, you're welcome to change this to another table.
+    | При использовании драйвера "database" вы можете указать таблицу, в которой
+    | будут храниться данные сессий. По умолчанию используется таблица 'sessions'.
     |
     */
-
-    'table' => env('SESSION_TABLE', 'sessions'),
+    'table' => env('SESSION_TABLE', 'sessions'), // Таблица для хранения сессий в базе данных
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cache Store
+    | Хранилище кеша для сессий
     |--------------------------------------------------------------------------
     |
-    | When using one of the framework's cache driven session backends, you may
-    | define the cache store which should be used to store the session data
-    | between requests. This must match one of your defined cache stores.
+    | Если используется один из драйверов сессий, основанных на кеше, вы можете
+    | указать хранилище кеша, которое будет использоваться для хранения данных сессий.
+    | Это должно соответствовать одному из определенных хранилищ кеша.
     |
-    | Affects: "apc", "dynamodb", "memcached", "redis"
+    | Поддерживается для драйверов: "apc", "dynamodb", "memcached", "redis"
     |
     */
-
-    'store' => env('SESSION_STORE'),
+    'store' => env('SESSION_STORE'), // Хранилище кеша для сессий
 
     /*
     |--------------------------------------------------------------------------
-    | Session Sweeping Lottery
+    | Вероятность очистки старых сессий
     |--------------------------------------------------------------------------
     |
-    | Some session drivers must manually sweep their storage location to get
-    | rid of old sessions from storage. Here are the chances that it will
-    | happen on a given request. By default, the odds are 2 out of 100.
+    | Некоторые драйверы сессий требуют периодической очистки старых сессий.
+    | Этот параметр определяет вероятность того, что такая очистка произойдет
+    | при каждом запросе. По умолчанию, вероятность равна 2 из 100.
     |
     */
-
-    'lottery' => [2, 100],
+    'lottery' => [2, 100], // Вероятность очистки старых сессий (2%)
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Name
+    | Имя cookie для сессий
     |--------------------------------------------------------------------------
     |
-    | Here you may change the name of the session cookie that is created by
-    | the framework. Typically, you should not need to change this value
-    | since doing so does not grant a meaningful security improvement.
+    | Здесь вы можете изменить имя cookie для сессий. Обычно это не требуется
+    | делать, так как изменение имени cookie не улучшает безопасность.
     |
     */
-
     'cookie' => env(
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
-    ),
+    ), // Имя cookie для сессий
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Path
+    | Путь для cookie сессий
     |--------------------------------------------------------------------------
     |
-    | The session cookie path determines the path for which the cookie will
-    | be regarded as available. Typically, this will be the root path of
-    | your application, but you're free to change this when necessary.
+    | Путь для cookie сессий определяет область действия cookie. Обычно это корень
+    | приложения, но вы можете изменить этот параметр при необходимости.
     |
     */
-
-    'path' => env('SESSION_PATH', '/'),
+    'path' => env('SESSION_PATH', '/'), // Путь для cookie сессий
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Domain
+    | Домен для cookie сессий
     |--------------------------------------------------------------------------
     |
-    | This value determines the domain and subdomains the session cookie is
-    | available to. By default, the cookie will be available to the root
-    | domain and all subdomains. Typically, this shouldn't be changed.
+    | Это значение определяет домен и поддомены, для которых cookie сессий будет
+    | доступно. Обычно это корневой домен и все поддомены.
     |
     */
-
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => env('SESSION_DOMAIN'), // Домен для cookie сессий
 
     /*
     |--------------------------------------------------------------------------
-    | HTTPS Only Cookies
+    | Cookie только для HTTPS
     |--------------------------------------------------------------------------
     |
-    | By setting this option to true, session cookies will only be sent back
-    | to the server if the browser has a HTTPS connection. This will keep
-    | the cookie from being sent to you when it can't be done securely.
+    | Если установить этот параметр в true, cookie сессий будут отправляться только
+    | через HTTPS-соединения. Это помогает защитить cookie от перехвата в
+    | незащищенных HTTP-соединениях.
     |
     */
-
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => env('SESSION_SECURE_COOKIE'), // Отправлять cookie только через HTTPS
 
     /*
     |--------------------------------------------------------------------------
-    | HTTP Access Only
+    | Cookie доступные только по HTTP
     |--------------------------------------------------------------------------
     |
-    | Setting this value to true will prevent JavaScript from accessing the
-    | value of the cookie and the cookie will only be accessible through
-    | the HTTP protocol. It's unlikely you should disable this option.
+    | Если этот параметр включен, cookie сессий будут доступны только через
+    | HTTP-запросы и не будут доступны через JavaScript.
     |
     */
-
-    'http_only' => env('SESSION_HTTP_ONLY', true),
+    'http_only' => env('SESSION_HTTP_ONLY', true), // Ограничить доступ к cookie через HTTP
 
     /*
     |--------------------------------------------------------------------------
-    | Same-Site Cookies
+    | Атрибут Same-Site для cookie
     |--------------------------------------------------------------------------
     |
-    | This option determines how your cookies behave when cross-site requests
-    | take place, and can be used to mitigate CSRF attacks. By default, we
-    | will set this value to "lax" to permit secure cross-site requests.
+    | Этот параметр определяет поведение cookie при межсайтовых запросах, что
+    | может помочь в предотвращении CSRF-атак. По умолчанию используется значение "lax".
     |
-    | See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
-    |
-    | Supported: "lax", "strict", "none", null
+    | Поддерживаемые значения: "lax", "strict", "none", null
     |
     */
-
-    'same_site' => env('SESSION_SAME_SITE', 'lax'),
+    'same_site' => env('SESSION_SAME_SITE', 'lax'), // Атрибут Same-Site для cookie
 
     /*
     |--------------------------------------------------------------------------
-    | Partitioned Cookies
+    | Разделенные cookie
     |--------------------------------------------------------------------------
     |
-    | Setting this value to true will tie the cookie to the top-level site for
-    | a cross-site context. Partitioned cookies are accepted by the browser
-    | when flagged "secure" and the Same-Site attribute is set to "none".
+    | Включение этого параметра привяжет cookie к сайту верхнего уровня в контексте
+    | кросс-сайтовых запросов. Разделенные cookie принимаются браузерами при
+    | установленном флаге "secure" и атрибуте Same-Site, установленном в "none".
     |
     */
-
-    'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
+    'partitioned' => env('SESSION_PARTITIONED_COOKIE', false), // Включить разделенные cookie
 
 ];

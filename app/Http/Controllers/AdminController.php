@@ -28,19 +28,21 @@ class AdminController extends Controller
     // Управление фильмами
     public function movies()
     {
+        // Получаем список фильмов с пагинацией
         $movies = Movie::paginate(10);
         return view('admin.movies.index', compact('movies'));
     }
 
     public function addMovieForm()
     {
+        // Отображаем форму добавления фильма
         return view('admin.movies.create');
     }
 
     // Метод для сохранения нового фильма
     public function storeMovie(Request $request)
     {
-        // Валидация данных
+        // Валидация данных фильма
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -50,15 +52,16 @@ class AdminController extends Controller
             'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Создаем фильм
+        // Создание нового фильма
         $movie = new Movie($validated);
 
-        // Проверка и сохранение постера
+        // Проверка наличия постера и его сохранение
         if ($request->hasFile('poster')) {
             $posterPath = $request->file('poster')->store('public/posters');
             $movie->poster_url = Storage::url($posterPath);
         }
 
+        // Сохранение фильма
         $movie->save();
 
         return redirect()->route('admin.movies.index')->with('success', 'Фильм успешно добавлен!');
@@ -67,7 +70,7 @@ class AdminController extends Controller
     // Метод для обновления существующего фильма
     public function updateMovie(Request $request, Movie $movie)
     {
-        // Валидация данных
+        // Валидация данных фильма
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -80,9 +83,9 @@ class AdminController extends Controller
         // Обновление данных фильма
         $movie->fill($validated);
 
-        // Проверка и обновление постера
+        // Если загружен новый постер, удаляем старый и сохраняем новый
         if ($request->hasFile('poster')) {
-            // Удаление старого постера, если он есть
+            // Удаляем старый постер, если он существует
             if ($movie->poster_url) {
                 $posterPath = str_replace('storage/', 'public/', $movie->poster_url); 
                 if (Storage::exists($posterPath)) {
@@ -92,9 +95,10 @@ class AdminController extends Controller
             }
             // Сохранение нового постера
             $posterPath = $request->file('poster')->store('public/posters');
-            $movie->poster_url = Storage::url($posterPath); // Сохраняем новый путь к постеру
+            $movie->poster_url = Storage::url($posterPath);
         }
 
+        // Сохранение обновленного фильма
         $movie->save();
 
         return redirect()->route('admin.movies.index')->with('success', 'Фильм успешно обновлен!');
@@ -103,11 +107,12 @@ class AdminController extends Controller
     // Управление пользователями
     public function users(Request $request)
     {
-        // Поиск пользователей
+        // Поиск и фильтрация пользователей
         $searchTerm = $request->input('search');
         $adminsQuery = User::where('role', 'admin');
         $guestsQuery = User::where('role', 'guest');
 
+        // Если есть запрос на поиск, фильтруем по имени или email
         if ($searchTerm) {
             $adminsQuery->where(function ($query) use ($searchTerm) {
                 $query->where('name', 'like', '%' . $searchTerm . '%')
@@ -120,6 +125,7 @@ class AdminController extends Controller
             });
         }
 
+        // Получаем администраторов и гостей с пагинацией
         $admins = $adminsQuery->paginate(10);
         $guests = $guestsQuery->paginate(10);
 
@@ -129,12 +135,14 @@ class AdminController extends Controller
     // Переключение роли пользователя
     public function toggleRole(User $user)
     {
+        // Переключаем роль пользователя между 'admin' и 'guest'
         if ($user->isAdmin()) {
             $user->role = 'guest';
         } else {
             $user->role = 'admin';
         }
 
+        // Сохраняем обновленную роль
         $user->save();
 
         return redirect()->route('admin.users')->with('status', 'Роль пользователя успешно изменена.');
@@ -143,18 +151,20 @@ class AdminController extends Controller
     // Управление залами
     public function halls()
     {
+        // Получаем список залов с пагинацией
         $cinemaHalls = CinemaHall::paginate(10);
         return view('admin.halls.index', compact('cinemaHalls'));
     }
 
     public function createHallForm()
     {
+        // Отображаем форму для создания нового зала
         return view('admin.halls.create');
     }
 
     public function storeHall(Request $request)
     {
-        // Валидация входных данных
+        // Валидация данных зала
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'rows' => 'required|integer|min:1',
@@ -169,19 +179,20 @@ class AdminController extends Controller
 
     public function editHallForm(CinemaHall $hall)
     {
+        // Отображаем форму для редактирования зала
         return view('admin.halls.edit', compact('hall'));
     }
 
     public function updateHall(Request $request, CinemaHall $hall)
     {
-        // Валидация данных
+        // Валидация данных зала
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'rows' => 'required|integer|min:1',
             'seats_per_row' => 'required|integer|min:1',
         ]);
 
-        // Обновление данных о зале
+        // Обновление данных зала
         $hall->update($validated);
 
         return redirect()->route('admin.halls.index')->with('success', 'Зал успешно обновлен.');
@@ -189,9 +200,11 @@ class AdminController extends Controller
 
     public function toggleHallActivation(CinemaHall $hall)
     {
+        // Переключаем статус активации зала
         $hall->is_active = !$hall->is_active;
         $hall->save();
 
+        // Сообщение об активации/деактивации зала
         $status = $hall->is_active ? 'активирован' : 'деактивирован';
         return redirect()->route('admin.halls.index')->with('status', "Зал успешно {$status}");
     }
@@ -199,12 +212,14 @@ class AdminController extends Controller
     // Управление сеансами
     public function movieSessions()
     {
+        // Получаем сеансы с подгруженными фильмами и залами
         $seances = Seance::with(['movie', 'cinemaHall'])->orderBy('start_time', 'asc')->paginate(10);
         return view('admin.seances.index', compact('seances'));
     }
 
     public function addMovieSessionForm()
     {
+        // Отображаем форму для добавления сеанса
         $movies = Movie::all();
         $cinemaHalls = CinemaHall::all();
         return view('admin.seances.create', compact('movies', 'cinemaHalls'));
@@ -212,6 +227,7 @@ class AdminController extends Controller
 
     public function storeMovieSession(Request $request)
     {
+        // Валидация данных сеанса
         $validated = $request->validate([
             'cinema_hall_id' => 'required|exists:cinema_halls,id',
             'movie_id' => 'required|exists:movies,id',
@@ -221,6 +237,7 @@ class AdminController extends Controller
             'price_vip' => 'required|numeric|min:0|max:20000',
         ]);
 
+        // Создание нового сеанса
         Seance::create($validated);
 
         return redirect()->route('admin.seances.index')->with('success', 'Сеанс успешно создан!');
@@ -228,6 +245,7 @@ class AdminController extends Controller
 
     public function editMovieSessionForm(Seance $movieSession)
     {
+        // Отображаем форму для редактирования сеанса
         $movies = Movie::all();
         $cinemaHalls = CinemaHall::all();
         return view('admin.seances.edit', compact('movieSession', 'movies', 'cinemaHalls'));
@@ -235,6 +253,7 @@ class AdminController extends Controller
 
     public function updateMovieSession(Request $request, Seance $movieSession)
     {
+        // Валидация данных сеанса
         $validated = $request->validate([
             'cinema_hall_id' => 'required|exists:cinema_halls,id',
             'movie_id' => 'required|exists:movies,id',
@@ -244,6 +263,7 @@ class AdminController extends Controller
             'price_vip' => 'required|numeric|min:0|max:20000',
         ]);
 
+        // Обновление данных сеанса
         $movieSession->update($validated);
 
         return redirect()->route('admin.seances.index')->with('success', 'Сеанс успешно обновлен!');
@@ -251,6 +271,7 @@ class AdminController extends Controller
 
     public function deleteMovieSession(Seance $movieSession)
     {
+        // Удаление сеанса
         $movieSession->delete();
         return redirect()->route('admin.seances.index')->with('success', 'Сеанс успешно удалён!');
     }

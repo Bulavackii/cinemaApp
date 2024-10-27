@@ -1,24 +1,24 @@
 1) В терминале выполните следующую команду для создания пустого файла базы данных:
 
-**`touch database/database.sqlite`**
+**touch database/database.sqlite**
 
-либо руками создайте файл базы данных **database.sqlite** в папке: **database.**
+либо руками создайте файл базы данных **database.sqlite** в папке: **database**
 
-2. Затем проверяете, чтобы у вас не было **vendor** и **node_modules**,
+2. Затем проверяете, чтобы у вас не было **vendor** и **node_modules,**
 3. Затем выполните последовательно команды:
 
-**`composer install`**
+**composer install**
 
-**`npm install`**
+**npm install**
 
-**`npm run build`**
+**npm run build**
 
-4. Выполняете миграции командой **`php artisan migrate`**
-5. Затем запускайте сервер командой **`php artisan serve`**
+4. Выполняете миграции командой **php artisan migrate**
+5. Затем запускайте сервер командой **php artisan serve**
 
-> админка находится по адресу: **`http://127.0.0.1:8000/admin/`**
+> админка находится по адресу: **http://127.0.0.1:8000/admin/**
 
-> клиентская часть находится по адресу: **`http://127.0.0.1:8000/`**
+> клиентская часть находится по адресу: **http://127.0.0.1:8000/**
 
 Посты для фильмов лежат в папке **recources->views->admin->posters**
 
@@ -26,9 +26,9 @@
 
 Затем выполняете удаление и новое создание символической ссылки (для изображений):
 
-`rm public/storage`
+**rm public/storage** (если public/storage у вас уже существовала);
 
-`php artisan storage:link`
+**php artisan storage:link** (если public/storage у вас отсутствует);
 
 **Требования к оснастке:**
 

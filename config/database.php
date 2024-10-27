@@ -6,62 +6,63 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | Подключение к базе данных по умолчанию
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for database operations. This is
-    | the connection which will be utilized unless another connection
-    | is explicitly specified when you execute a query / statement.
+    | Здесь вы можете указать, какое подключение к базе данных будет использоваться
+    | по умолчанию для операций с базой данных. Это подключение будет использовано,
+    | если не указано другое при выполнении запроса или операции.
     |
     */
-
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'sqlite'), // Подключение к базе данных по умолчанию
 
     /*
     |--------------------------------------------------------------------------
-    | Database Connections
+    | Подключения к базам данных
     |--------------------------------------------------------------------------
     |
-    | Below are all of the database connections defined for your application.
-    | An example configuration is provided for each database system which
-    | is supported by Laravel. You're free to add / remove connections.
+    | Здесь определяются все подключения к базам данных для вашего приложения.
+    | Пример конфигурации предоставлен для каждой базы данных, поддерживаемой
+    | Laravel. Вы можете добавить или удалить подключения по мере необходимости.
     |
     */
 
     'connections' => [
 
+        // Подключение SQLite
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
+            'prefix' => '', // Префикс для всех таблиц (не используется по умолчанию)
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true), // Включение внешних ключей
+            'busy_timeout' => null, // Время ожидания занятых операций
+            'journal_mode' => null, // Режим журнала операций
+            'synchronous' => null, // Синхронный режим
         ],
 
+        // Подключение MySQL
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
+            'host' => env('DB_HOST', '127.0.0.1'),  // Хост для подключения к базе данных
+            'port' => env('DB_PORT', '3306'),      // Порт для подключения к MySQL
+            'database' => env('DB_DATABASE', 'laravel'), // Название базы данных
+            'username' => env('DB_USERNAME', 'root'),   // Имя пользователя
+            'password' => env('DB_PASSWORD', ''),       // Пароль
+            'unix_socket' => env('DB_SOCKET', ''),      // Использование Unix-сокета (если требуется)
+            'charset' => env('DB_CHARSET', 'utf8mb4'),  // Кодировка
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'), // Сортировка
+            'prefix' => '',         // Префикс таблиц
+            'prefix_indexes' => true, // Индексация с учетом префикса
+            'strict' => true,       // Включение строгого режима MySQL
+            'engine' => null,       // Движок таблиц (InnoDB по умолчанию)
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'), // Опции SSL
             ]) : [],
         ],
 
+        // Подключение MariaDB
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
@@ -82,6 +83,7 @@ return [
             ]) : [],
         ],
 
+        // Подключение PostgreSQL
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
@@ -90,13 +92,14 @@ return [
             'database' => env('DB_DATABASE', 'laravel'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET', 'utf8'),
+            'charset' => env('DB_CHARSET', 'utf8'), // Кодировка для PostgreSQL
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
+            'search_path' => 'public', // Пути поиска для схем
+            'sslmode' => 'prefer', // SSL-режим (может быть 'disable', 'require', 'verify-full')
         ],
 
+        // Подключение SQL Server
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
@@ -108,48 +111,44 @@ return [
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
-            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
-            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Migration Repository Table
+    | Таблица миграций
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run on the database.
+    | Эта таблица отслеживает все миграции, которые уже были выполнены для
+    | вашего приложения. Используя эту информацию, можно определить, какие
+    | миграции еще не были выполнены на базе данных.
     |
     */
-
     'migrations' => [
-        'table' => 'migrations',
-        'update_date_on_publish' => true,
+        'table' => 'migrations',  // Таблица для миграций
+        'update_date_on_publish' => true, // Обновление даты при публикации миграции
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Redis Databases
+    | Redis
     |--------------------------------------------------------------------------
     |
-    | Redis is an open source, fast, and advanced key-value store that also
-    | provides a richer body of commands than a typical key-value system
-    | such as Memcached. You may define your connection settings here.
+    | Redis — это быстрая и мощная система ключ-значение, которая также предоставляет
+    | богатый набор команд. Здесь вы можете настроить подключение к Redis.
     |
     */
-
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'phpredis'), // Клиент Redis по умолчанию
 
         'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'cluster' => env('REDIS_CLUSTER', 'redis'), // Опция кластера для Redis
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'), // Префикс для ключей Redis
         ],
 
+        // Основная база данных Redis
         'default' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -159,6 +158,7 @@ return [
             'database' => env('REDIS_DB', '0'),
         ],
 
+        // База данных Redis для кеша
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),

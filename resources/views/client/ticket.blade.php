@@ -8,6 +8,7 @@
             <div class="ticket-left">
                 <h2 class="movie-title text-center mb-4">Ваш билет</h2>
                 
+                <!-- Информация о фильме и сеансе -->
                 <p class="ticket-info"><strong>Фильм:</strong> {{ $session->movie->title }}</p>
                 <p class="ticket-info"><strong>Зал:</strong> {{ $session->cinemaHall->name }}</p>
                 <p class="ticket-info"><strong>Время сеанса:</strong> {{ $session->start_time->translatedFormat('H:i, d F Y') }}</p>
@@ -24,18 +25,20 @@
                     @endforeach
                 </ul>
 
+                <!-- Код бронирования -->
                 <p class="ticket-info"><strong>Код бронирования:</strong> {{ $booking_code }}</p>
 
+                <!-- QR-код билета -->
                 @if($qrCodeUrl)
                     <div class="qr-code text-center">
                         <img src="{{ $qrCodeUrl }}" alt="QR-код билета" class="img-fluid">
-                        
                     </div>
                 @else
                     <p class="text-danger">QR-код не был сгенерирован.</p>
                 @endif
 
                 <div class="text-center mt-4">
+                    <!-- Кнопка для печати билета -->
                     <button class="btn btn-warning" onclick="window.print()">Печать билета</button>
                 </div>
             </div>
@@ -47,6 +50,7 @@
     </div>
 
     @push('styles')
+        <!-- Подключение стилей для страницы билета -->
         <link rel="stylesheet" href="{{ asset('client/css/index.css') }}">
     @endpush
 @endsection

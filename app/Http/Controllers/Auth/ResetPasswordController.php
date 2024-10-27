@@ -9,21 +9,21 @@ class ResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Controller
+    | Контроллер сброса пароля
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
+    | Этот контроллер отвечает за обработку запросов на сброс пароля и
+    | использует трейт, который добавляет соответствующее поведение.
+    | Ты можешь изменить любые методы по своему усмотрению.
     |
     */
 
-    use ResetsPasswords;
+    use ResetsPasswords; // Трейт для обработки сброса пароля
 
     /**
-     * Where to redirect users after resetting their password.
+     * Куда перенаправлять пользователей после успешного сброса пароля.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Перенаправление на главную страницу после сброса пароля
 }

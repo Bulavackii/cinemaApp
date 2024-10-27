@@ -3,11 +3,13 @@
 @section('content')
     <div class="container mt-5">
         <div class="col-lg-8 mx-auto">
+            <!-- Карточка со списком фильмов -->
             <div class="card shadow-lg movie-card">
                 <div class="card-header bg-primary text-white text-center">
                     <h2 class="mb-0">Список фильмов</h2>
                 </div>
                 <div class="card-body">
+                    <!-- Сообщения об ошибках -->
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul class="mb-0">
@@ -19,13 +21,16 @@
                         </div>
                     @endif
 
+                    <!-- Кнопка для добавления нового фильма -->
                     <a href="{{ route('admin.movies.create') }}" class="btn btn-primary mb-3">Добавить</a>
 
+                    <!-- Сообщение, если фильмов нет -->
                     @if ($movies->isEmpty())
                         <div class="alert alert-info">
                             Нет добавленных фильмов. Пожалуйста, добавьте новый фильм.
                         </div>
                     @else
+                        <!-- Таблица со списком фильмов -->
                         <table class="table table-striped table-bordered movie-table">
                             <thead class="table-dark">
                                 <tr>
@@ -45,12 +50,14 @@
                                         <td>{{ $movie->country }}</td>
                                         <td>{{ $movie->duration }} мин</td>
                                         <td>
+                                            <!-- Проверка наличия постера -->
                                             @if ($movie->poster_url && Storage::exists(str_replace('storage/', 'public/', $movie->poster_url)))
+                                                <!-- Увеличенный просмотр постера в модальном окне -->
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#posterModal{{ $movie->id }}">
                                                     <img src="{{ asset($movie->poster_url) }}" alt="{{ $movie->title }}" class="movie-poster-thumb">
                                                 </a>
 
-                                                <!-- Modal для увеличенного просмотра постера -->
+                                                <!-- Модальное окно для увеличенного постера -->
                                                 <div class="modal fade" id="posterModal{{ $movie->id }}" tabindex="-1" aria-labelledby="posterModalLabel{{ $movie->id }}" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
@@ -69,6 +76,7 @@
                                             @endif
                                         </td>
                                         <td>
+                                            <!-- Кнопка редактирования фильма -->
                                             <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-warning btn-sm">Правка</a>
 
                                             <!-- Форма для удаления фильма -->

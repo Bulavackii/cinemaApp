@@ -9,31 +9,32 @@ class ConfirmPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Confirm Password Controller
+    | Контроллер подтверждения пароля
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password confirmations and
-    | uses a simple trait to include the behavior. You're free to explore
-    | this trait and override any functions that require customization.
+    | Этот контроллер отвечает за обработку подтверждений паролей и использует
+    | трейт, который добавляет соответствующее поведение. Ты можешь изменить
+    | функции в этом трейте, если потребуется.
     |
     */
 
     use ConfirmsPasswords;
 
     /**
-     * Where to redirect users when the intended url fails.
+     * Куда перенаправлять пользователей, если подтверждение не удалось.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Перенаправление на домашнюю страницу в случае неудачи
 
     /**
-     * Create a new controller instance.
+     * Создание нового экземпляра контроллера.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // Применение middleware для проверки аутентификации пользователя
+        $this->middleware('auth'); // Только авторизованные пользователи могут подтверждать пароль
     }
 }

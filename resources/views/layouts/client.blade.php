@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Cinema App')</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Подключение Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Font Awesome для иконок -->
+    <!-- Подключение Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Custom CSS -->
+    <!-- Подключение пользовательских стилей -->
     <link rel="stylesheet" href="{{ asset('client/css/index.css') }}">
 
-    @stack('styles')
+    @stack('styles') <!-- Стек пользовательских стилей -->
 </head>
 <body class="d-flex flex-column min-vh-100">
     <!-- Навигация -->
@@ -90,11 +90,11 @@
 
     <!-- Основной контент -->
     <header class="container mt-4">
-        @yield('header')
+        @yield('header') <!-- Заголовок страницы -->
     </header>
     
     <main class="flex-grow-1 container mt-5">
-        @yield('content')
+        @yield('content') <!-- Основное содержимое страницы -->
     </main>
 
     <!-- Футер -->
@@ -139,26 +139,26 @@
     <!-- Подключение Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Яндекс.Карты -->
+    <!-- Яндекс.Карты для отображения адреса -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
         ymaps.ready(function () {
             var myMap = new ymaps.Map('map', {
-                center: [55.751574, 37.573856],
+                center: [55.751574, 37.573856], // Координаты центра карты
                 zoom: 12
             }, {
                 searchControlProvider: 'yandex#search'
             });
 
             myMap.geoObjects.add(new ymaps.Placemark([55.751574, 37.573856], {
-                balloonContent: 'Наш кинотеатр'
+                balloonContent: 'Наш кинотеатр' // Подсказка на метке
             }, {
                 preset: 'islands#icon',
-                iconColor: '#007bff'
+                iconColor: '#007bff' // Цвет иконки
             }));
         });
     </script>
 
-    @stack('scripts')
+    @stack('scripts') <!-- Стек пользовательских скриптов -->
 </body>
 </html>

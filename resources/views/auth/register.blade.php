@@ -5,16 +5,20 @@
 @section('content')
 <div class="container mt-5 auth-page">
     <div class="row justify-content-center">
-        <div class="col-md-6"> <!-- Уменьшена ширина формы -->
+        <div class="col-md-6">
+            <!-- Карточка для формы регистрации -->
             <div class="card shadow-lg">
+                <!-- Заголовок карточки с текстом "Регистрация" -->
                 <div class="card-header bg-primary text-white text-center">
                     {{ __('Регистрация') }}
                 </div>
 
                 <div class="card-body">
+                    <!-- Форма регистрации пользователя -->
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <!-- Поле для ввода имени пользователя -->
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Имя') }}</label>
 
@@ -29,6 +33,7 @@
                             </div>
                         </div>
 
+                        <!-- Поле для ввода электронной почты -->
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Электронная почта') }}</label>
 
@@ -43,12 +48,14 @@
                             </div>
                         </div>
 
+                        <!-- Поле для ввода пароля с возможностью его показа/скрытия -->
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}</label>
 
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <!-- Кнопка для показа/скрытия пароля -->
                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password')">
                                         <i class="fa fa-eye"></i>
                                     </button>
@@ -62,12 +69,14 @@
                             </div>
                         </div>
 
+                        <!-- Поле для подтверждения пароля с возможностью его показа/скрытия -->
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Подтвердите пароль') }}</label>
 
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <!-- Кнопка для показа/скрытия пароля -->
                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password-confirm')">
                                         <i class="fa fa-eye"></i>
                                     </button>
@@ -75,6 +84,7 @@
                             </div>
                         </div>
 
+                        <!-- Кнопка отправки формы регистрации -->
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-warning text-white">
@@ -89,6 +99,7 @@
     </div>
 </div>
 
+<!-- Скрипт для показа/скрытия пароля -->
 <script>
     function togglePasswordVisibility(fieldId) {
         const field = document.getElementById(fieldId);
@@ -107,6 +118,7 @@
 @endsection
 
 @push('styles')
+<!-- Подключение стилей и FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
     body {
@@ -117,11 +129,11 @@
     }
 
     .card-header {
-        background-color: #007bff; /* Синий цвет заголовка */
+        background-color: #007bff; 
     }
 
     .btn-warning {
-        background-color: #ff9800; /* Оранжевая кнопка */
+        background-color: #ff9800; 
         border-radius: 20px;
     }
 
@@ -129,27 +141,18 @@
         background-color: #e68900;
     }
 
-    .form-check-label {
-        color: #333;
-    }
-
     .form-label {
         color: #333;
         font-weight: bold;
     }
 
-    /* Иконка глаза */
     .input-group button {
         border-radius: 0 10px 10px 0;
     }
 
-    .input-group button i {
-        color: #333;
-    }
-
-    /* Стили для страницы регистрации и авторизации */
+    /* Стили для страницы регистрации */
     .auth-page {
-        margin-bottom: 100px; /* Увеличенный отступ перед футером */
+        margin-bottom: 100px;
     }
 </style>
 @endpush

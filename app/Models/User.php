@@ -12,58 +12,70 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Атрибуты, которые могут быть массово назначены.
+     * Эти поля могут быть заполнены при создании или обновлении пользователя.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
+        'name',        // Имя пользователя
+        'email',       // Email пользователя
+        'password',    // Пароль пользователя
+        'role',        // Роль пользователя (admin, guest и т.д.)
     ];
 
     /**
      * Атрибуты, которые должны быть скрыты для сериализации.
+     * Эти поля не будут отображаться при выводе данных пользователя.
      *
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password',          // Скрываем пароль
+        'remember_token',    // Токен для "Запомнить меня"
     ];
 
     /**
      * Атрибуты, которые должны быть приведены к типам.
+     * Преобразование данных при работе с базой данных.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'email_verified_at' => 'datetime',  // Поле с датой подтверждения email
+        'password' => 'hashed',             // Хеширование пароля
     ];
 
     /**
      * Проверка, является ли пользователь администратором.
-     *
+     * 
      * @return bool
      */
     public function isAdmin()
     {
+        // Проверяем, имеет ли пользователь роль 'admin'
         return $this->role === 'admin';
     }
 
     /**
      * Проверка, является ли пользователь гостем.
-     *
+     * 
      * @return bool
      */
     public function isGuest()
     {
+        // Проверяем, имеет ли пользователь роль 'guest'
         return $this->role === 'guest';
     }
 
+    /**
+     * Связь с билетами.
+     * Пользователь может иметь множество билетов.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tickets()
     {
+        // Связь "один ко многим" — пользователь может иметь множество билетов
         return $this->hasMany(Ticket::class);
     }
 }

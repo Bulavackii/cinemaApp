@@ -24,6 +24,7 @@
                     <div class="col-sm-12 col-md-8 d-flex justify-content-center align-items-stretch mb-4">
                         <div class="ticket-card">
                             <div class="ticket-left">
+                                <!-- Заголовок фильма и информация о билете -->
                                 <h5 class="movie-title">{{ $ticket->seance->movie->title }}</h5>
                                 <p>
                                     <strong>Зал:</strong> {{ $ticket->seance->cinemaHall->name }}<br>
@@ -32,6 +33,7 @@
                                 </p>
                             </div>
                             <div class="ticket-right">
+                                <!-- QR-код и кнопка для его скачивания -->
                                 <img src="{{ asset($ticket->qr_code) }}" alt="QR Code" class="qr-code">
                                 <a href="{{ asset($ticket->qr_code) }}" class="btn btn-download" download="QR код">
                                     Скачать QR-код
@@ -45,6 +47,7 @@
     </div>
 
     @push('styles')
+        <!-- Подключение стилей для страницы "Мои билеты" -->
         <link rel="stylesheet" href="{{ asset('client/css/index.css') }}">
     @endpush
 @endsection

@@ -4,94 +4,98 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Mailer
+    | Почтовый сервис по умолчанию
     |--------------------------------------------------------------------------
     |
-    | This option controls the default mailer that is used to send all email
-    | messages unless another mailer is explicitly specified when sending
-    | the message. All additional mailers can be configured within the
-    | "mailers" array. Examples of each type of mailer are provided.
+    | Эта опция контролирует почтовый сервис (mailer), который используется
+    | по умолчанию для отправки всех email-сообщений, если не указан другой
+    | сервис при отправке сообщения. Дополнительные почтовые сервисы можно
+    | настроить в массиве "mailers".
     |
     */
-
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'log'), // Почтовый сервис по умолчанию ('log' для логирования писем)
 
     /*
     |--------------------------------------------------------------------------
-    | Mailer Configurations
+    | Конфигурации почтовых сервисов
     |--------------------------------------------------------------------------
     |
-    | Here you may configure all of the mailers used by your application plus
-    | their respective settings. Several examples have been configured for
-    | you and you are free to add your own as your application requires.
+    | Здесь вы можете настроить все почтовые сервисы, которые использует ваше
+    | приложение, и их соответствующие параметры. Laravel поддерживает
+    | множество почтовых "транспортов", которые могут быть использованы
+    | для доставки писем. Вы можете добавить свои почтовые сервисы.
     |
-    | Laravel supports a variety of mail "transport" drivers that can be used
-    | when delivering an email. You may specify which one you're using for
-    | your mailers below. You may also add additional mailers if needed.
-    |
-    | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
-    |            "postmark", "resend", "log", "array",
-    |            "failover", "roundrobin"
+    | Поддерживаемые транспорты: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    |                            "postmark", "resend", "log", "array",
+    |                            "failover", "roundrobin"
     |
     */
-
     'mailers' => [
 
+        // Конфигурация для SMTP сервера
         'smtp' => [
-            'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+            'transport' => 'smtp',  // Транспорт для отправки писем
+            'url' => env('MAIL_URL'), // URL SMTP сервера
+            'host' => env('MAIL_HOST', '127.0.0.1'), // Хост SMTP сервера
+            'port' => env('MAIL_PORT', 2525), // Порт SMTP сервера
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'), // Тип шифрования
+            'username' => env('MAIL_USERNAME'), // Имя пользователя для SMTP
+            'password' => env('MAIL_PASSWORD'), // Пароль для SMTP
+            'timeout' => null, // Таймаут для соединения
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)), // Локальный домен для EHLO команды
         ],
 
+        // Amazon SES
         'ses' => [
-            'transport' => 'ses',
+            'transport' => 'ses', // Транспорт для Amazon SES
         ],
 
+        // Postmark
         'postmark' => [
-            'transport' => 'postmark',
+            'transport' => 'postmark', // Транспорт для Postmark
             // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
             // 'client' => [
-            //     'timeout' => 5,
+            //     'timeout' => 5, // Таймаут для клиента Postmark
             // ],
         ],
 
+        // Resend
         'resend' => [
-            'transport' => 'resend',
+            'transport' => 'resend', // Транспорт для сервиса Resend
         ],
 
+        // Отправка через Sendmail
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'), // Путь к sendmail
         ],
 
+        // Логирование всех писем
         'log' => [
             'transport' => 'log',
-            'channel' => env('MAIL_LOG_CHANNEL'),
+            'channel' => env('MAIL_LOG_CHANNEL'), // Канал для логирования писем
         ],
 
+        // Транспорт для хранения писем в массиве (без реальной отправки)
         'array' => [
-            'transport' => 'array',
+            'transport' => 'array', // Транспорт для хранения писем в массиве
         ],
 
+        // Failover (резервный) почтовый сервис
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
-                'smtp',
-                'log',
+                'smtp',  // Основной сервис
+                'log',   // Резервный сервис
             ],
         ],
 
+        // Round-robin (циклический) почтовый сервис
         'roundrobin' => [
             'transport' => 'roundrobin',
             'mailers' => [
-                'ses',
-                'postmark',
+                'ses',        // Первичный сервис
+                'postmark',   // Вторичный сервис
             ],
         ],
 
@@ -99,18 +103,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global "From" Address
+    | Глобальный адрес "От кого"
     |--------------------------------------------------------------------------
     |
-    | You may wish for all emails sent by your application to be sent from
-    | the same address. Here you may specify a name and address that is
-    | used globally for all emails that are sent by your application.
+    | Вы можете указать глобальный адрес и имя отправителя для всех писем,
+    | отправляемых вашим приложением. Эти данные будут использоваться для
+    | всех писем, если не указаны другие данные в конкретном письме.
     |
     */
-
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'), // Адрес отправителя по умолчанию
+        'name' => env('MAIL_FROM_NAME', 'Example'), // Имя отправителя по умолчанию
     ],
 
 ];

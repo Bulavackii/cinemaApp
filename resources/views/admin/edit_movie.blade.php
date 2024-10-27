@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="container mt-4">
+        <!-- Заголовок страницы -->
         <h1 class="mb-4">Редактировать фильм</h1>
 
+        <!-- Проверка и вывод ошибок валидации -->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -14,15 +16,18 @@
             </div>
         @endif
 
+        <!-- Форма для редактирования фильма -->
         <form action="{{ route('admin.movies.update', $movie->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
+            <!-- Основная информация о фильме с кнопкой "Сохранить" -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="h5">Основная информация</h2>
                 <button type="submit" class="btn btn-primary">Сохранить изменения</button>
             </div>
 
+            <!-- Поле для ввода названия фильма -->
             <div class="mb-3">
                 <label for="title" class="form-label">Название:</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title', $movie->title) }}" required>
@@ -31,6 +36,7 @@
                 @enderror
             </div>
 
+            <!-- Поле для ввода описания фильма -->
             <div class="mb-3">
                 <label for="description" class="form-label">Описание:</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" required>{{ old('description', $movie->description) }}</textarea>
@@ -39,6 +45,7 @@
                 @enderror
             </div>
 
+            <!-- Поле для ввода страны выпуска -->
             <div class="mb-3">
                 <label for="country" class="form-label">Страна:</label>
                 <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" id="country" value="{{ old('country', $movie->country) }}" required>
@@ -47,6 +54,7 @@
                 @enderror
             </div>
 
+            <!-- Поле для ввода жанра -->
             <div class="mb-3">
                 <label for="genre" class="form-label">Жанр:</label>
                 <input type="text" class="form-control @error('genre') is-invalid @enderror" name="genre" id="genre" value="{{ old('genre', $movie->genre) }}" required>
@@ -55,6 +63,7 @@
                 @enderror
             </div>
 
+            <!-- Поле для ввода длительности фильма -->
             <div class="mb-3">
                 <label for="duration" class="form-label">Длительность (минуты):</label>
                 <input type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" id="duration" value="{{ old('duration', $movie->duration) }}" required>
@@ -63,6 +72,7 @@
                 @enderror
             </div>
 
+            <!-- Поле для загрузки постера и возможность его удаления -->
             <div class="mb-3">
                 <label for="poster" class="form-label">Постер:</label>
                 @if ($movie->poster_url)
@@ -82,6 +92,7 @@
                 @enderror
             </div>
 
+            <!-- Кнопки "Сохранить" и "Вернуться к списку фильмов" -->
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">Сохранить изменения</button>
                 <a href="{{ route('admin.movies.index') }}" class="btn btn-secondary ms-2">Вернуться к списку фильмов</a>

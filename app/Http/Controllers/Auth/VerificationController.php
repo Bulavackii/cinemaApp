@@ -9,33 +9,38 @@ class VerificationController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Email Verification Controller
+    | Контроллер проверки электронной почты
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
+    | Этот контроллер отвечает за обработку верификации email для пользователей,
+    | которые недавно зарегистрировались в приложении. Также можно повторно
+    | отправить письмо, если пользователь не получил его изначально.
     |
     */
 
-    use VerifiesEmails;
+    use VerifiesEmails; // Трейт для обработки верификации email
 
     /**
-     * Where to redirect users after verification.
+     * Куда перенаправлять пользователей после успешной верификации.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Перенаправление на главную страницу после верификации
 
     /**
-     * Create a new controller instance.
+     * Создание нового экземпляра контроллера.
      *
      * @return void
      */
     public function __construct()
     {
+        // Middleware 'auth' гарантирует, что только авторизованные пользователи могут проходить верификацию
         $this->middleware('auth');
+        
+        // Middleware 'signed' проверяет, что запрос на верификацию был подписан корректной ссылкой
         $this->middleware('signed')->only('verify');
+
+        // Middleware 'throttle' ограничивает количество попыток верификации: не более 6 попыток за минуту
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 }

@@ -9,14 +9,14 @@ class ForgotPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Controller
+    | Контроллер сброса пароля
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
+    | Этот контроллер отвечает за обработку запросов на сброс пароля и
+    | использует трейт, который помогает отправлять уведомления о сбросе
+    | пароля пользователям. Ты можешь изменить или расширить этот трейт.
     |
     */
 
-    use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails; // Трейт для отправки уведомлений на email с инструкциями по сбросу пароля
 }

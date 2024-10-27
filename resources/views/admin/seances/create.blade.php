@@ -2,8 +2,10 @@
 
 @section('content')
 <div class="container mt-5">
+    <!-- Заголовок страницы -->
     <h1 class="text-center mb-4">Создать Новый Сеанс</h1>
 
+    <!-- Проверка на наличие ошибок валидации и вывод их списка -->
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Упс!</strong> Есть некоторые проблемы с вашими данными.
@@ -16,9 +18,11 @@
         </div>
     @endif
 
+    <!-- Форма создания нового сеанса -->
     <form action="{{ route('admin.seances.store') }}" method="POST">
         @csrf
 
+        <!-- Выбор фильма и зала для сеанса -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <label for="movie_id" class="form-label">Фильм:</label>
@@ -51,6 +55,7 @@
             </div>
         </div>
 
+        <!-- Время начала и окончания сеанса -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <label for="start_time" class="form-label">Время Начала:</label>
@@ -70,6 +75,7 @@
             </div>
         </div>
 
+        <!-- Цены на обычные и VIP места -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <label for="price_regular" class="form-label">Место (обычное), руб.:</label>
@@ -88,6 +94,7 @@
             </div>
         </div>
 
+        <!-- Кнопки действий -->
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Создать Сеанс</button>
             <a href="{{ route('admin.seances.index') }}" class="btn btn-secondary ms-3">Отмена</a>

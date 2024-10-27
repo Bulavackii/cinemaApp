@@ -4,67 +4,65 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Defaults
+    | Значения по умолчанию для аутентификации
     |--------------------------------------------------------------------------
     |
-    | This option defines the default authentication "guard" and password
-    | reset "broker" for your application. You may change these values
-    | as required, but they're a perfect start for most applications.
+    | Этот параметр определяет значения по умолчанию для "guard" (механизма
+    | защиты) и "broker" (сброса пароля) для вашего приложения. Вы можете
+    | изменить эти значения по мере необходимости, но они уже настроены для
+    | большинства приложений.
     |
     */
-
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'guard' => env('AUTH_GUARD', 'web'),           // Guard по умолчанию (использует 'web')
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'), // Broker сброса пароля по умолчанию
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Guards
+    | Механизмы аутентификации (Guards)
     |--------------------------------------------------------------------------
     |
-    | Next, you may define every authentication guard for your application.
-    | Of course, a great default configuration has been defined for you
-    | which utilizes session storage plus the Eloquent user provider.
+    | Здесь вы можете определить каждый механизм аутентификации для вашего
+    | приложения. По умолчанию уже определена конфигурация, которая использует
+    | сессии и Eloquent-провайдер пользователя.
     |
-    | All authentication guards have a user provider, which defines how the
-    | users are actually retrieved out of your database or other storage
-    | system used by the application. Typically, Eloquent is utilized.
+    | Каждый guard имеет user provider, который определяет, как пользователи
+    | извлекаются из базы данных или другой системы хранения. Обычно используется Eloquent.
     |
-    | Supported: "session"
+    | Поддерживаемые драйверы: "session"
     |
     */
-
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            'driver' => 'session',    // Драйвер для сессий
+            'provider' => 'users',    // Провайдер пользователей
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | User Providers
+    | Провайдеры пользователей
     |--------------------------------------------------------------------------
     |
-    | All authentication guards have a user provider, which defines how the
-    | users are actually retrieved out of your database or other storage
-    | system used by the application. Typically, Eloquent is utilized.
+    | Каждый механизм аутентификации имеет user provider, который определяет, как
+    | пользователи извлекаются из базы данных или другой системы хранения.
+    | Обычно используется Eloquent.
     |
-    | If you have multiple user tables or models you may configure multiple
-    | providers to represent the model / table. These providers may then
-    | be assigned to any extra authentication guards you have defined.
+    | Вы можете настроить несколько провайдеров, если у вас есть несколько таблиц
+    | или моделей пользователей. Эти провайдеры могут быть назначены для
+    | любого дополнительного guard'а, который вы определили.
     |
-    | Supported: "database", "eloquent"
+    | Поддерживаемые драйверы: "database", "eloquent"
     |
     */
-
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'driver' => 'eloquent',              // Используется драйвер Eloquent для работы с моделью
+            'model' => env('AUTH_MODEL', App\Models\User::class), // Модель пользователя
         ],
 
+        // Пример для работы с таблицей напрямую через драйвер database:
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -73,43 +71,39 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Resetting Passwords
+    | Сброс паролей
     |--------------------------------------------------------------------------
     |
-    | These configuration options specify the behavior of Laravel's password
-    | reset functionality, including the table utilized for token storage
-    | and the user provider that is invoked to actually retrieve users.
+    | Эти параметры определяют поведение функции сброса паролей в Laravel, включая
+    | таблицу, используемую для хранения токенов сброса, и провайдер пользователей,
+    | который используется для получения данных пользователя.
     |
-    | The expiry time is the number of minutes that each reset token will be
-    | considered valid. This security feature keeps tokens short-lived so
-    | they have less time to be guessed. You may change this as needed.
+    | Время истечения указывает, сколько минут будет действителен токен сброса.
+    | Этот параметр позволяет сделать токены короткоживущими для повышения безопасности.
     |
-    | The throttle setting is the number of seconds a user must wait before
-    | generating more password reset tokens. This prevents the user from
-    | quickly generating a very large amount of password reset tokens.
+    | Настройка throttle указывает количество секунд, которые пользователь должен
+    | подождать перед созданием нового токена сброса пароля.
     |
     */
-
     'passwords' => [
         'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
+            'provider' => 'users',  // Провайдер пользователей для сброса пароля
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'), // Таблица для токенов сброса паролей
+            'expire' => 60,        // Время истечения токена (в минутах)
+            'throttle' => 60,      // Время ожидания перед генерацией нового токена (в секундах)
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Password Confirmation Timeout
+    | Тайм-аут подтверждения пароля
     |--------------------------------------------------------------------------
     |
-    | Here you may define the amount of seconds before a password confirmation
-    | window expires and users are asked to re-enter their password via the
-    | confirmation screen. By default, the timeout lasts for three hours.
+    | Здесь вы можете определить количество секунд, после которых пользователю
+    | нужно будет снова ввести пароль на экране подтверждения пароля.
+    | По умолчанию тайм-аут составляет три часа (10800 секунд).
     |
     */
-
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800), // Тайм-аут для подтверждения пароля (3 часа)
 
 ];
